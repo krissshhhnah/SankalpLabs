@@ -1,0 +1,81 @@
+# DATABASE SCHEMA SPECIFICATION
+
+## 1. Relational Entity Model (Prisma ORM)
+
+```prisma
+datasource db {
+  provider = "sqlite" // Configurable to postgresql for production
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id           String        @id @default(uuid())
+  email        String        @unique
+  passwordHash String
+  name         String
+  avatarUrl    String?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  boards       Board[]       @relation("BoardOwner")
+  memberships  BoardMember[]
+}
+
+model Board {
+  id         String        @id @default(uuid())
+  name       String
+  ownerId    String
+  owner      User          @relation("BoardOwner", fields: [ownerId], references: [id], onDelete: Cascade)
+  isPublic   Boolean       @default(false)
+  createdAt  DateTime      @default(now())
+  updatedAt  DateTime      @updatedAt
+  members    BoardMember[]
+  objects    BoardObject[]
+  invites    BoardInvite[]
+}
+
+model BoardMember {
+  id        String   @id @default(uuid())
+  boardId   String
+  board     Board    @relation(fields: [boardId], references: [id], onDelete: Cascade)
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role      String   @default("EDITOR") // OWNER, EDITOR, VIEWER
+  createdAt DateTime @default(now())
+
+  @@unique([boardId, userId])
+}
+
+model BoardObject {
+  id        String   @id @default(uuid())
+  boardId   String
+  board     Board    @relation(fields: [boardId], references: [id], onDelete: Cascade)
+  type      String
+  x         Float
+  y         Float
+  width     Float
+  height    Float
+  rotation  Float    @default(0)
+  zIndex    Int      @default(0)
+  locked    Boolean  @default(false)
+  data      String   // JSON stringified object-specific data
+  createdBy String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([boardId])
+}
+
+model BoardInvite {
+  id        String   @id @default(uuid())
+  boardId   String
+  board     Board    @relation(fields: [boardId], references: [id], onDelete: Cascade)
+  code      String   @unique
+  role      String   @default("EDITOR")
+  expiresAt DateTime?
+  createdAt DateTime @default(now())
+}
+```

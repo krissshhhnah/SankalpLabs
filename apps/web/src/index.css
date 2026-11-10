@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-warm-ivory: #FAFAF7;
+  --color-ink-black: #1A1917;
+  --color-terracotta: #A2502F;
+  --color-vibrant-orange: #D9542C;
+  --color-soft-blush: #F6E7DE;
+  --color-warm-grey: #5E5C56;
+  --color-soft-stone: #D9D8D5;
+}
+
+.font-display {
+  font-family: 'Plus Jakarta Sans', 'Outfit', system-ui, sans-serif;
+  letter-spacing: -0.025em;
+}
+
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-family: 'Inter', sans-serif;
+  background-color: #FAFAF7;
+  color: #1A1917;
+}
+
+/* Custom sleek scrollbar for dashboard and content panels */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #D9D8D5;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #5E5C56;
+}
+
+/* Brand Glassmorphic panel utility styles */
+.glass-panel {
+  background: rgba(250, 250, 247, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(217, 216, 213, 0.9);
+  box-shadow: 0 4px 12px -2px rgba(26, 25, 23, 0.06);
+}
+
+.glass-panel-light {
+  background: rgba(250, 250, 247, 0.98);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(217, 216, 213, 1);
+  box-shadow: 0 4px 12px -2px rgba(26, 25, 23, 0.08);
+}

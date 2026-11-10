@@ -1,0 +1,22 @@
+export type Tool =
+  | 'select'
+  | 'pan'
+  | 'sticky'
+  | 'text'
+  | 'rectangle'
+  | 'rounded-rectangle'
+  | 'ellipse'
+  | 'triangle'
+  | 'diamond'
+  | 'star'
+  | 'hexagon'
+  | 'bubble'
+  | 'line'
+  | 'arrow'
+  | 'curved-arrow'
+  | 'connector'
+  | 'draw'
+  | 'image'
+  | 'frame'
+  | 'comment';
+

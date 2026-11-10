@@ -1,0 +1,19 @@
+{
+  "name": "@whiteboard/collaboration",
+  "version": "1.0.0",
+  "private": true,
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@whiteboard/shared": "*",
+    "y-protocols": "^1.0.6",
+    "y-websocket": "^1.5.4",
+    "yjs": "^13.6.14"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3"
+  }
+}
